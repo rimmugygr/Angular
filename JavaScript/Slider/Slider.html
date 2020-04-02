@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Time</title>
+    <style>
+        body
+        {
+            background-color: black;
+            font-size: 24px;
+            color: white;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
+    <script type="text/javascript">
+
+        var number = Math.floor(Math.random()*3)+1;
+        var timer1;
+        var timer2;
+        function view(newNumber) {
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+            number = newNumber-1;
+            viewOff();
+            setTimeout("viewAuto()",500);
+        }
+        function viewOff() {
+            $("#slider").fadeOut(500);
+        }
+        function viewAuto() {
+            number++;
+            if (number>3) number=1;
+            var file = "<img scr=\"image/img" + number + ".png\"/>";
+            document.getElementById("slider").innerHTML = file;
+            $("#slider").fadeIn(500);
+            timer1 = setTimeout("viewAuto()",5000);
+            timer2 = setTimeout("viewOff()",4500);
+        }
+
+    </script>
+</head>
+<body onload="viewAuto()">
+
+    <span onclick="view(1)" style="cursor: pointer;">[1]</span>
+    <span onclick="view(2)" style="cursor: pointer;">[2]</span>
+    <span onclick="view(3)" style="cursor: pointer;">[3]</span>
+    <div id="slider"></div>
+</body>
+</html>

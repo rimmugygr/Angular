@@ -1,0 +1,51 @@
+body {
+    background-color: black;
+    font-size: 28px;
+    color: olive;
+}
+h1 {
+    font-size: 64px;
+    text-align: center;
+    margin-bottom: 0;
+    font-weight: 400;
+}
+.board {
+    width: 600px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+.card {
+    font-size: 120px;
+    text-align: center;
+    width: 125px;
+    height: 125px;
+    display: inline-block;
+    margin: 3px;
+    border: 4px solid darkgreen;
+    border-radius: 5px;
+    background-color: darkolivegreen;
+    color: darkolivegreen;
+    filter: brightness(70%);
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+}
+.cardActivated {
+    font-size: 120px;
+    text-align: center;
+    width: 125px;
+    height: 125px;
+    display: inline-block;
+    margin: 3px;
+    border: 4px solid olive;
+    border-radius: 5px;
+    background-color: darkolivegreen;
+    color: olive;
+    filter: brightness(100%);
+    transition: all .2s ease-in-out;
+    cursor: default;
+}
+.card:hover{
+    border:4px solid olive;
+    filter: brightness(100%);
+}

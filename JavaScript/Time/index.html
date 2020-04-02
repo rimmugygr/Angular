@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Time</title>
+    <script type="text/javascript">
+        function getTime(){
+            var dateTime = new Date();
+            var hours = dateTime.getHours();
+            if (hours<10) hours = "0"+hours;
+            var minutes = dateTime.getMinutes();
+            if (minutes<10) minutes = "0"+minutes;
+            var seconds = dateTime.getSeconds();
+            if (seconds<10) seconds = "0"+seconds;
+            document.getElementById("time").innerHTML=hours+":"+minutes+":"+seconds;
+            setTimeout("getTime()",1000);//timer
+        }
+    </script>
+</head>
+<body onload="getTime()">
+    <div id="time"></div>
+</body>
+</html>

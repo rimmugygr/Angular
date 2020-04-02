@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Time</title>
+    <style>
+        body
+        {
+            background-color: black;
+            font-size: 24px;
+            color: white;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function test() {
+            var input = document.getElementById("field").value;
+            // document.write(input);
+            if (input>0) document.getElementById("result").innerHTML="positive";
+            else if (input<0) document.getElementById("result").innerHTML="negative";
+            else if (input==0) document.getElementById("result").innerHTML="zero";
+            else document.getElementById("result").innerHTML="error"
+        }
+        function getNumbers() {
+            var firstNumber = document.getElementById("first").value;
+            var secondNumber = document.getElementById("second").value;
+            var result = "";
+            for (i=firstNumber;i<=secondNumber;i++){
+                result= result + i + " ";
+            }
+            document.getElementById("listNumber").innerHTML=result;
+        }
+    </script>
+</head>
+<body >
+    <input type="text" id="field"/>
+    <input type="submit" value="Test" onclick="test()"/>
+    <div id="result"></div>
+    <br>
+
+    <input type="text" id="first"/>
+    <input type="text" id="second"/>
+    <input type="submit" value="Get Numbers" onclick="getNumbers()"/>
+    <div id="listNumber"></div>
+    <br>
+
+</body>
+</html>
