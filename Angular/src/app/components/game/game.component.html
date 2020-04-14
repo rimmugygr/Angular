@@ -1,8 +1,31 @@
-<p>Game Component Start</p>
+<h2>Game Component Start</h2>
 
-<p>Give name:</p>
-<input type="text" #name>
-<button (click)="sayHello(name.value)">Say Hello</button>
-{{message}}
+<h2>Give name:</h2>
+<label>
+  <input type="text" #name>
+  <button (click)="sayHello(name.value)">Say Hello</button>
+</label>
+{{helloMessage}}
+<br/><br/>
 
-<p>Game Component End</p>
+<label>
+  <h2> Give value
+  <input #currencyValue type="text"/>
+ of
+  <mat-form-field>
+    <mat-select [(value)]="currencyType">
+      <mat-option  *ngFor="let current of currencies" [value]="current">{{current}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+ in EURO on precision
+  <mat-form-field>
+    <mat-select [(value)]="currencyPrecision">
+      <mat-option  *ngFor="let precision of [0,1,2,3]" [value]="precision">{{precision}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button (click)="check(currencyValue.value,currencyType,currencyPrecision)">Check</button>
+    {{checkMessage}}</h2>
+</label>
+
+<h2>Game Component End</h2>
