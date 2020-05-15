@@ -1,0 +1,26 @@
+
+
+<div>
+  <button *ngFor="let topic of allTopics" (click)="getAllMessage(topic)">{{topic}}</button>
+  <input placeholder="name" [(ngModel)]="newTopic"/>
+  <button (click)="addNewTopic()">New Topic</button>
+</div>
+
+<div *ngIf="actualTopic">
+  <span *ngFor="let message of actualTopic.messages">
+    {{message.content}}
+    <br/>
+    {{message.author}}
+    <br/>
+    <br/>
+  </span>
+
+  <div>
+    <label>
+      <input placeholder="name" [(ngModel)]="newMessage.author"/><br>
+      <textarea placeholder="content" [(ngModel)]="newMessage.content"></textarea><br>
+      <button (click)="sendMessage()">Send Message</button>
+    </label>
+  </div>
+
+</div>
