@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, shareReplay, tap} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 import {Department} from '../model/department';
 
@@ -14,6 +14,7 @@ export class DepartmentService {
   departments$ = this.http.get<Department[]>(DEPARTMENT_URL_API)
     .pipe(
       tap(data => console.log(`Departments: `, JSON.stringify(data))),
+      shareReplay(1),
       catchError(err => {
         console.log(err);
         return throwError(err);

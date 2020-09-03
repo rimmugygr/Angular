@@ -1,0 +1,32 @@
+<div class="card"  style="color: black; font-size: large">
+  <div class="container">
+
+    <div class="card-header">
+      <div class="col justify-content-between">
+        <div class="row">
+          Id: <strong> {{employee.id}} </strong>
+        </div>
+        <div class="row">
+          Name:  <strong> {{employee.firstName}} {{employee.lastName}} </strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="col justify-content-between">
+        <div class="row">Department:  <strong>{{employee.department}}</strong></div>
+        <div class="row">Email:  <strong>{{employee.email}}</strong></div>
+        <div class="row">City:  <strong>{{employee.city}}</strong></div>
+        <div class="row">Street:  <strong>{{employee.street}}</strong></div>
+        <div class="row">Description:  <strong>{{employee.description}}</strong></div>
+      </div>
+    </div>
+
+    <div class="card-footer d-flex justify-content-end">
+      <button type="button" class="btn btn-outline-secondary mx-2" (click)="onAddClick(employee)" cdkFocusInitial>Add</button>
+      <button type="button" class="btn btn-outline-secondary" (click)="onCloseClick()">Close</button>
+    </div>
+
+  </div>
+</div>
+

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {combineLatest, EMPTY, Observable, throwError} from 'rxjs';
+import {BehaviorSubject, combineLatest, EMPTY, merge, Observable, Subject, throwError} from 'rxjs';
 import {Employee} from '../model/employee';
-import {catchError, map, tap} from 'rxjs/operators';
+import {catchError, map, scan, shareReplay, tap} from 'rxjs/operators';
 import {DepartmentService} from './department.service';
 
 const EMPLOYEE_URL_API = `http://localhost:8080/employees`;
@@ -11,14 +11,27 @@ const EMPLOYEE_URL_API = `http://localhost:8080/employees`;
   providedIn: 'root'
 })
 export class EmployeeService {
+  private employeeAddSubject = new Subject<Employee>();
+  employeeAddAction$ = this.employeeAddSubject.asObservable();
+
+  private departmentSelectedSubject = new BehaviorSubject<number>(0);
+  departmentSelectedAction$ = this.departmentSelectedSubject.asObservable();
+
   employees$ = this.http.get<Employee[]>(EMPLOYEE_URL_API)
     .pipe(
       tap(data => console.log(`Products: `, JSON.stringify(data))),
       catchError(this.handleError)
     );
 
-  employeesWithDepartment$ = combineLatest([
+  employeesWithAdd$ = merge(
     this.employees$,
+    this.employeeAddAction$
+  ).pipe(
+      scan(((acc: Employee[], value: Employee) => [...acc, value]))
+    );
+
+  employeesWithDepartment$ = combineLatest([
+    this.employeesWithAdd$,
     this.departmentService.departments$
   ]).pipe(
     map(([employees, department]) =>
@@ -30,8 +43,21 @@ export class EmployeeService {
           searchKey: [employee.firstName, employee.lastName]
         }) as Employee)
     ),
-    tap(data => console.log(`Products with category: `, JSON.stringify(data)))
+    tap(data => console.log(`Products with category: `, JSON.stringify(data))),
+    shareReplay(1)
   );
+
+
+  employeesSelected$: Observable<Employee[]> = combineLatest([
+    this.employeesWithDepartment$,
+    this.departmentSelectedAction$
+  ]).pipe(
+    map(([employees, departmentId]) =>
+      employees.filter( employee =>
+        departmentId ? employee.departmentId === departmentId : true
+      ))
+  );
+
 
 
   constructor(private http: HttpClient,
@@ -51,5 +77,13 @@ export class EmployeeService {
     }
     console.error(err);
     return throwError(errorMessage);
+  }
+
+  addEmployee(employee: Employee): void {
+    this.employeeAddSubject.next(employee);
+  }
+
+  selectedDepartment(departmentId: number): void {
+    this.departmentSelectedSubject.next(+departmentId);
   }
 }

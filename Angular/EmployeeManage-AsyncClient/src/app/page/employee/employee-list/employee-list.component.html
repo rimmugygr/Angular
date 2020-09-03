@@ -5,13 +5,14 @@
 
   <div class="card-body">
     <div class="container">
-      <div class="row justify-content-between">
+      <div class="row justify-content-between mb-3">
         <div class="col-3">
-          <select class="form-control">
-<!--                  (change)="onSelected($event.target.value)">-->
-            <option value="0">Display All Department</option>
-            <option *ngFor="let department of departments$ | async"
-                    [value]="department.id">{{ department.name }}</option>
+          <select class="form-control" (change)="onSelectedDepartment($event.target.value)">
+            <option value="0">Display All</option>
+            <option *ngFor="let department of departments$ | async" [value]="department.id"
+                    [selected]="department.id === (selectedDepartment$ | async)" >
+              {{ department.name.slice(0,1).toUpperCase() + department.name.slice(1).toLowerCase() }} department
+            </option>
           </select>
         </div>
         <div class="col-2">
@@ -23,8 +24,7 @@
     </div>
 
     <div class="table-responsive">
-      <table class="table mb-0"
-             *ngIf="(employees$ | async) as employees; else loading">
+      <table class="table mb-0"  *ngIf="(employees$ | async) as employees; else loading">
         <thead>
         <tr>
           <th>Id</th>
@@ -33,6 +33,7 @@
           <th>Email</th>
           <th>Department</th>
           <th>Address</th>
+          <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -43,6 +44,9 @@
           <td>{{ employee.email }}</td>
           <td>{{ employee.department }}</td>
           <td>{{ employee.address }}</td>
+          <td>
+            <button type="button" class="btn btn-outline-secondary" (click)="openDetailModal(employee)">Detail</button>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -52,11 +56,11 @@
 </div>
 
 <div class="alert alert-danger"
-     *ngIf="errorMessage">
+     *ngIf="errorMessageAction$ | async as errorMessage">
   {{ errorMessage }}
 </div>
 
-<ng-template #loading>
+<ng-template class="alert alert-danger" #loading>
   Loading stuff...
 </ng-template>
 
