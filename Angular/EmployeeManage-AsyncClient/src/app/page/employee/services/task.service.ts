@@ -2,23 +2,27 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {catchError, shareReplay, tap} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
-import {Department} from '../model/department';
+import {Task} from '../model/task';
 
-const DEPARTMENT_URL_API =  `http://localhost:8080/departments`;
+const TASK_URL_API =  `http://localhost:8080/tasks`;
 
 @Injectable({
   providedIn: 'root'
 })
-export class DepartmentService {
+export class TaskService {
 
-  departments$ = this.http.get<Department[]>(DEPARTMENT_URL_API)
+  tasks$ = this.http.get<Task[]>(TASK_URL_API)
     .pipe(
-      tap(data => console.log(`Departments: `, JSON.stringify(data))),
+      tap(data => console.log(`Tasks: `, JSON.stringify(data))),
       shareReplay(1),
       catchError(this.handleError)
     );
 
   constructor(private http: HttpClient) { }
+
+  getTaskById(taskId: number): Observable<Task> {
+    return this.http.get<Task>(`${TASK_URL_API}/${taskId}`);
+  }
 
   private handleError(err: any): Observable<never> {
     // in a real world app, we may send the server to some remote logging infrastructure

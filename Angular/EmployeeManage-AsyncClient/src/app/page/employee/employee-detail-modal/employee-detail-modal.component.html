@@ -1,5 +1,5 @@
-<div class="card"  style="color: black; font-size: large">
-  <div class="container">
+<div class="card"   style="color: black; font-size: large">
+  <div class="container" >
     <div class="card-header">
       <div class="col justify-content-between">
         <div class="row">
@@ -19,6 +19,34 @@
         <div class="row">Street:  <strong>{{employee.street}}</strong></div>
         <div class="row">Description:  <strong>{{employee.description}}</strong></div>
       </div>
+
+      <div class="table-responsive">
+        <table class="table mb-0"  *ngIf="tasks$ | async as tasks">
+          <thead>
+          <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Progress</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let task of tasks">
+            <td>{{ task.id }}</td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.progress }} %</td>
+            <td>{{ task.status }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
+
+
     </div>
     <div class="card-footer d-flex justify-content-end">
       <button type="button" class="btn btn-outline-secondary" (click)="onCloseClick()">Close</button>

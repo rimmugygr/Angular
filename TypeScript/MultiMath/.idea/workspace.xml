@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:orgin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="68ad9a2d-c033-41fb-85eb-65161d7f4101" name="Default Changelist" comment="" />
+    <list default="true" id="68ad9a2d-c033-41fb-85eb-65161d7f4101" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,13 +35,17 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="ProjectId" id="1aGaDPdiKpPhuqYhek9WQeoILiw" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -39,6 +63,17 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/TypeScript/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -48,6 +83,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -59,34 +95,44 @@
       <option name="presentableId" value="Default" />
       <updated>1586364263265</updated>
       <workItem from="1586364266065" duration="27649000" />
+      <workItem from="1598967653728" duration="108000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
     <option name="exactExcludedFiles">
       <list>
-        <option value="$PROJECT_DIR$/scoreboard.js" />
-        <option value="$PROJECT_DIR$/script.js" />
-        <option value="$PROJECT_DIR$/player.js" />
-        <option value="$PROJECT_DIR$/game.js.map" />
-        <option value="$PROJECT_DIR$/result.js.map" />
-        <option value="$PROJECT_DIR$/script.js.map" />
-        <option value="$PROJECT_DIR$/ClassData.js" />
-        <option value="$PROJECT_DIR$/player.js.map" />
-        <option value="$PROJECT_DIR$/scoreboard.js.map" />
-        <option value="$PROJECT_DIR$/data.js" />
-        <option value="$PROJECT_DIR$/ClassData.js.map" />
-        <option value="$PROJECT_DIR$/game.js" />
-        <option value="$PROJECT_DIR$/utility.js.map" />
-        <option value="$PROJECT_DIR$/result.js" />
-        <option value="$PROJECT_DIR$/data.js.map" />
         <option value="$PROJECT_DIR$/person.js.map" />
-        <option value="$PROJECT_DIR$/utility.js" />
         <option value="$PROJECT_DIR$/person.js" />
         <option value="$PROJECT_DIR$/ClassData.js.map" />
         <option value="$PROJECT_DIR$/ClassData.js" />
+        <option value="$PROJECT_DIR$/utility.js.map" />
+        <option value="$PROJECT_DIR$/utility.js" />
+        <option value="$PROJECT_DIR$/data.js.map" />
+        <option value="$PROJECT_DIR$/data.js" />
+        <option value="$PROJECT_DIR$/player.js.map" />
+        <option value="$PROJECT_DIR$/player.js" />
+        <option value="$PROJECT_DIR$/game.js.map" />
+        <option value="$PROJECT_DIR$/game.js" />
+        <option value="$PROJECT_DIR$/result.js.map" />
+        <option value="$PROJECT_DIR$/result.js" />
+        <option value="$PROJECT_DIR$/script.js.map" />
+        <option value="$PROJECT_DIR$/script.js" />
+        <option value="$PROJECT_DIR$/scoreboard.js.map" />
+        <option value="$PROJECT_DIR$/scoreboard.js" />
       </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
     </option>
   </component>
   <component name="WindowStateProjectService">

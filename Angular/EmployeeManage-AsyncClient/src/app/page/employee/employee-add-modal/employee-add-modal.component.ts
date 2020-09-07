@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Employee} from '../model/employee';
 import {EmployeeService} from '../services/employee.service';
@@ -6,7 +6,8 @@ import {EmployeeService} from '../services/employee.service';
 @Component({
   selector: 'app-employee-add-modal',
   templateUrl: './employee-add-modal.component.html',
-  styleUrls: ['./employee-add-modal.component.css']
+  styleUrls: ['./employee-add-modal.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmployeeAddModalComponent implements OnInit {
 
@@ -18,7 +19,8 @@ export class EmployeeAddModalComponent implements OnInit {
     firstName: 'first',
     id: 11,
     lastName: 'last',
-    street: 'Center 2'
+    street: 'Center 2',
+    taskIds: [2, 4]
   };
 
   constructor(

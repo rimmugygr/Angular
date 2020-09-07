@@ -28,15 +28,6 @@ export class EmployeeListComponent implements OnInit {
     );
   selectedDepartment$ = this.employeeService.departmentSelectedAction$;
 
-  // selectedDepartment$ = combineLatest([
-  //   this.employeeService.departmentSelectedAction$,
-  //   this.departments$
-  // ]).pipe(
-  //   map(([selectedNumber, departments]) => {
-  //     if (selectedNumber === 0) { return `Display all`; }
-  //     else { return departments.find(x => x.id === selectedNumber).name; }
-  //   }));
-
   employees$ = this.employeeService.employeesSelected$
     .pipe(
       catchError( err => {
@@ -60,7 +51,8 @@ export class EmployeeListComponent implements OnInit {
     const dialogRef = this.dialog.open(EmployeeAddModalComponent);
   }
 
-  openDetailModal(employee: Employee): void {
+  openDetailModal(employeeId: number, employee: Employee): void {
+    this.employeeService.selectedEmployee(employeeId);
     const dialogRef = this.dialog.open(EmployeeDetailModalComponent, {
       data: employee
     });

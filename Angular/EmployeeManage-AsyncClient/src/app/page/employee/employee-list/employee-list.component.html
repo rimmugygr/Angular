@@ -45,7 +45,7 @@
           <td>{{ employee.department }}</td>
           <td>{{ employee.address }}</td>
           <td>
-            <button type="button" class="btn btn-outline-secondary" (click)="openDetailModal(employee)">Detail</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="openDetailModal(employee.id, employee)">Detail</button>
           </td>
         </tr>
         </tbody>
