@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError, shareReplay, tap} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {Task} from '../model/task';
 
 const TASK_URL_API =  `http://localhost:8080/tasks`;
+const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,16 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
-  getTaskById(taskId: number): Observable<Task> {
+  getTaskById(taskId: string): Observable<Task> {
     return this.http.get<Task>(`${TASK_URL_API}/${taskId}`);
+  }
+
+  postTasks(tasks: Task[]): Observable<Task[]> {
+    return this.http.post<Task[]>(TASK_URL_API + `/list`, tasks, { headers })
+      .pipe(
+      tap(data => console.log('add tasks: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(err: any): Observable<never> {

@@ -43,15 +43,17 @@ export class EmployeeListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSelectedDepartment(departmentId: number): void {
+  onSelectedDepartment(departmentId: string): void {
     this.employeeService.selectedDepartment(departmentId);
   }
 
   onAdd(): void {
-    const dialogRef = this.dialog.open(EmployeeAddModalComponent);
+    const dialogRef = this.dialog.open(EmployeeAddModalComponent
+      // , {height: '400px', width: '1100px'}
+      );
   }
 
-  openDetailModal(employeeId: number, employee: Employee): void {
+  openDetailModal(employeeId: string, employee: Employee): void {
     this.employeeService.selectedEmployee(employeeId);
     const dialogRef = this.dialog.open(EmployeeDetailModalComponent, {
       data: employee

@@ -1,12 +1,12 @@
 export interface Employee {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
   city: string;
   street: string;
-  departmentId: number;
-  taskIds?: number[];
+  departmentId: string;
+  taskIds?: string[];
   department?: string;
   searchKey?: string[];
   address?: string;

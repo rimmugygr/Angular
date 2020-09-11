@@ -1,32 +1,292 @@
-<div class="card"  style="color: black; font-size: large">
+<div class="card"  style="color: black">
   <div class="container">
-
-    <div class="card-header">
-      <div class="col justify-content-between">
-        <div class="row">
-          Id: <strong> {{employee.id}} </strong>
-        </div>
-        <div class="row">
-          Name:  <strong> {{employee.firstName}} {{employee.lastName}} </strong>
-        </div>
-      </div>
-    </div>
-
     <div class="card-body">
-      <div class="col justify-content-between">
-        <div class="row">Department:  <strong>{{employee.department}}</strong></div>
-        <div class="row">Email:  <strong>{{employee.email}}</strong></div>
-        <div class="row">City:  <strong>{{employee.city}}</strong></div>
-        <div class="row">Street:  <strong>{{employee.street}}</strong></div>
-        <div class="row">Description:  <strong>{{employee.description}}</strong></div>
-      </div>
-    </div>
 
-    <div class="card-footer d-flex justify-content-end">
-      <button type="button" class="btn btn-outline-secondary mx-2" (click)="onAddClick(employee)" cdkFocusInitial>Add</button>
-      <button type="button" class="btn btn-outline-secondary" (click)="onCloseClick()">Close</button>
-    </div>
+      <form novalidate
+            (ngSubmit)="save()"
+            [formGroup]="employeeForm">
 
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="firstNameId">First Name</label>
+          <div class="col-md-4">
+            <input class="form-control"
+                   id="firstNameId"
+                   type="text"
+                   placeholder="First Name (required)"
+                   formControlName="firstName"
+                   [ngClass]="{'is-invalid': (employeeForm.get('firstName').touched ||
+                                            employeeForm.get('firstName').dirty) &&
+                                            !employeeForm.get('firstName').valid }" />
+            <span class="invalid-feedback">
+            <span *ngIf="employeeForm.get('firstName').errors?.required">
+              Please enter your first name.
+            </span>
+            <span *ngIf="employeeForm.get('firstName').errors?.minlength">
+              The first name must be longer than 3 characters.
+            </span>
+          </span>
+          </div>
+
+          <label class="col-md-2 col-form-label"
+                 for="lastNameId">Last Name</label>
+          <div class="col-md-4">
+            <input class="form-control"
+                   id="lastNameId"
+                   type="text"
+                   placeholder="Last Name (required)"
+                   formControlName="lastName"
+                   [ngClass]="{'is-invalid': (employeeForm.get('lastName').touched ||
+                                            employeeForm.get('lastName').dirty) &&
+                                            !employeeForm.get('lastName').valid }" />
+            <span class="invalid-feedback">
+            <span *ngIf="employeeForm.get('lastName').errors?.required">
+              Please enter your last name.
+            </span>
+            <span *ngIf="employeeForm.get('lastName').errors?.minlength">
+              The last name must be longer than 3 characters.
+            </span>
+          </span>
+          </div>
+        </div>
+
+        <div formGroupName="emailGroup">
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label"
+                   for="emailId">Email</label>
+            <div class="col-md-4">
+              <input class="form-control"
+                     id="emailId"
+                     type="email"
+                     placeholder="Email (required)"
+                     formControlName="email"
+                     [ngClass]="{'is-invalid': emailMessage }" />
+              <span class="invalid-feedback">
+              {{ emailMessage }}
+            </span>
+            </div>
+
+            <label class="col-md-2 col-form-label"
+                   for="confirmEmailId">Confirm Email</label>
+            <div class="col-md-4">
+              <input class="form-control"
+                     id="confirmEmailId"
+                     type="email"
+                     placeholder="Confirm Email (required)"
+                     formControlName="confirmEmail"
+                     [ngClass]="{'is-invalid': employeeForm.get('emailGroup').errors ||
+                                             ((employeeForm.get('emailGroup.confirmEmail').touched ||
+                                              employeeForm.get('emailGroup.confirmEmail').dirty) &&
+                                              !employeeForm.get('emailGroup.confirmEmail').valid) }" />
+              <span class="invalid-feedback">
+              <span *ngIf="employeeForm.get('emailGroup.confirmEmail').errors?.required">
+                Please confirm your email address.
+              </span>
+              <span *ngIf="employeeForm.get('emailGroup').errors?.match">
+                The confirmation does not match the email address.
+              </span>
+            </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="cityId">City</label>
+          <div class="col-md-4">
+            <input class="form-control"
+                   id="cityId"
+                   type="text"
+                   placeholder="City (required)"
+                   formControlName="city"
+                   [ngClass]="{'is-invalid': (employeeForm.get('city').touched ||
+                                            employeeForm.get('city').dirty) &&
+                                            !employeeForm.get('city').valid }" />
+            <span class="invalid-feedback">
+            <span *ngIf="employeeForm.get('city').errors?.required">
+              Please enter your city name.
+            </span>
+            <span *ngIf="employeeForm.get('firstName').errors?.minlength">
+              The city name must be longer than 3 characters.
+            </span>
+          </span>
+          </div>
+
+          <label class="col-md-2 col-form-label"
+                 for="streetId">Street</label>
+          <div class="col-md-4">
+            <input class="form-control"
+                   id="streetId"
+                   type="text"
+                   placeholder="Street (required)"
+                   formControlName="street"
+                   [ngClass]="{'is-invalid': (employeeForm.get('street').touched ||
+                                            employeeForm.get('street').dirty) &&
+                                            !employeeForm.get('street').valid }" />
+            <span class="invalid-feedback">
+            <span *ngIf="employeeForm.get('street').errors?.required">
+              Please enter your street name.
+            </span>
+            <span *ngIf="employeeForm.get('street').errors?.minlength">
+              The street name must be longer than 3 characters.
+            </span>
+          </span>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 attr.for="{{'departmentId'}}">Department</label>
+          <div class="col-md-3">
+            <select class="form-control"
+                    id="{{'departmentId'}}"
+                    formControlName="departmentId">
+              <option value=""
+                      disabled
+                      selected
+                      hidden>Select a department...</option>
+              <option *ngFor="let department of departments$ | async" [value]="department.id">
+                {{ department.name.slice(0,1).toUpperCase() + department.name.slice(1).toLowerCase() }} department
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div formArrayName="tasks">
+          <div [formGroupName]="i"
+               *ngFor="let task of tasks.controls; let i=index">
+
+            <div class="card  mb-2">
+
+              <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label"
+                       attr.for="{{'titleId' + i}}">Title</label>
+                <div class="col-md-4">
+                  <input class="form-control"
+                         id="{{ 'titleId' + i }}"
+                         type="text"
+                         placeholder="Task title (required)"
+                         formControlName="title"
+                         [ngClass]="{'is-invalid': (task.controls.title.touched ||
+                                                    task.controls.title.dirty) &&
+                                                    !task.controls.title.valid }">
+                  <span class="invalid-feedback">
+                    <span *ngIf="task.controls.title.errors?.required">
+                      Please enter task title.
+                    </span>
+                  </span>
+                </div>
+
+                <label class="col-md-2 col-form-label"
+                       attr.for="{{'descriptionId' + i}}">Description</label>
+                <div class="col-md-4">
+                  <input class="form-control"
+                         id="{{ 'descriptionId' + i }}"
+                         type="text"
+                         placeholder="Task description (required)"
+                         formControlName="description"
+                         [ngClass]="{'is-invalid': (task.controls.description.touched ||
+                                                    task.controls.description.dirty) &&
+                                                    !task.controls.description.valid }">
+                  <span class="invalid-feedback">
+                    <span *ngIf="task.controls.description.errors?.required">
+                      Please enter task description.
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label"
+                       attr.for="{{'statusId' + i}}">Status</label>
+                <div class="col-md-4">
+                  <input class="form-control"
+                         id="{{ 'statusId' + i }}"
+                         type="text"
+                         placeholder="Task status (required)"
+                         formControlName="status"
+                         [ngClass]="{'is-invalid': (task.controls.status.touched ||
+                                                    task.controls.status.dirty) &&
+                                                    !task.controls.status.valid }">
+                  <span class="invalid-feedback">
+                    <span *ngIf="task.controls.status.errors?.required">
+                      Please enter task status.
+                    </span>
+                  </span>
+                </div>
+
+                <label class="col-md-2 col-form-label"
+                       attr.for="{{'progressId' + i}}">Progress</label>
+                <div class="col-md-4">
+                  <input class="form-control"
+                         id="{{ 'progressId' + i }}"
+                         type="text"
+                         placeholder="Task progress (required)"
+                         formControlName="progress"
+                         [ngClass]="{'is-invalid': (task.controls.progress.touched ||
+                                                    task.controls.progress.dirty) &&
+                                                    !task.controls.progress.valid }">
+                  <span class="invalid-feedback">
+                    <span *ngIf="task.controls.progress.errors?.required">
+                      Please enter task progress.
+                    </span>
+                    <span *ngIf="task.controls.progress.errors?.min">
+                      The first name must bigger or equals 0.
+                    </span>
+                    <span *ngIf="task.controls.progress.errors?.max">
+                      The first name must smaller or equals 100.
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group row mb-2">
+                <button class="offset-md-4 btn btn-outline-secondary "
+                        type="button"
+                        title="Delete this Task"
+                        (click)="deleteTask(i)">Delete Task
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <div class="col-md-6">
+            <button class="btn btn-primary"
+                    type="button"
+                    [disabled]="!tasks.valid"
+                    (click)="addTask()">
+              Add Another Task
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <div class="offset-md-4 col-md-4">
+                <button type="submit"
+                        class="btn btn-primary mr-3"
+                        [disabled]="!employeeForm.valid">
+                  Save
+                </button>
+
+                <button type="button"
+                        class="btn btn-outline-secondary"
+                        (click)="onCloseClick()">
+                  Close
+                </button>
+          </div>
+        </div>
+
+      </form>
+
+
+
+      <br>Value: {{ employeeForm.value | json }}
+
+    </div>
   </div>
 </div>
 

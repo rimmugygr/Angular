@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, combineLatest, EMPTY, from, merge, Observable, Subject, throwError} from 'rxjs';
 import {Employee} from '../model/employee';
 import {catchError, filter, map, mergeMap, scan, shareReplay, switchMap, tap, toArray} from 'rxjs/operators';
@@ -8,6 +8,7 @@ import {TaskService} from './task.service';
 import {Task} from '../model/task';
 
 const EMPLOYEE_URL_API = `http://localhost:8080/employees`;
+const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,10 @@ export class EmployeeService {
   private employeeAddSubject = new Subject<Employee>();
   employeeAddAction$ = this.employeeAddSubject.asObservable();
 
-  private departmentSelectedSubject = new BehaviorSubject<number>(0);
+  private departmentSelectedSubject = new BehaviorSubject<string>(`All`);
   departmentSelectedAction$ = this.departmentSelectedSubject.asObservable();
 
-  private employeeSelectedSubject = new BehaviorSubject<number>(0);
+  private employeeSelectedSubject = new BehaviorSubject<string>('0');
   employeeSelectedAction$ = this.employeeSelectedSubject.asObservable();
 
   employees$ = this.http.get<Employee[]>(EMPLOYEE_URL_API)
@@ -60,7 +61,7 @@ export class EmployeeService {
     .pipe(
       map(([employees, departmentId]) =>
         employees.filter( employee =>
-          departmentId ? employee.departmentId === departmentId : true
+          departmentId !== `All`  ? employee.departmentId === departmentId : true
         )
       )
     );
@@ -113,15 +114,36 @@ export class EmployeeService {
     return throwError(errorMessage);
   }
 
-  addEmployee(employee: Employee): void {
+  private addEmployee(employee: Employee): void {
     this.employeeAddSubject.next(employee);
   }
 
-  selectedDepartment(departmentId: number): void {
-    this.departmentSelectedSubject.next(+departmentId);
+  selectedDepartment(departmentId: string): void {
+    this.departmentSelectedSubject.next(departmentId);
   }
 
-  selectedEmployee(employeeId: number): void {
-    this.employeeSelectedSubject.next(+employeeId);
+  selectedEmployee(employeeId: string): void {
+    this.employeeSelectedSubject.next(employeeId);
+  }
+
+  private postEmployee(employee: Employee): Observable<Employee> {
+    return this.http.post<Employee>(EMPLOYEE_URL_API, employee, {headers});
+  }
+
+  addEmployeeWithTasks(newEmployee: Employee, newTasks: Task[]): void {
+    let tasksIs: string[];
+    this.taskService.postTasks(newTasks).subscribe(
+      tasks => tasksIs = tasks.map(t => t.id),
+      error => console.log(error),
+      () => {
+        newEmployee.taskIds = tasksIs;
+        this.postEmployee(newEmployee).subscribe(
+          employee => this.addEmployee(employee),
+            error => console.log(error)
+        );
+      }
+    );
+
+
   }
 }
